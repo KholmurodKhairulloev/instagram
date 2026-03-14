@@ -1,61 +1,57 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// src/pages/LoginPage.tsx  (или где у тебя находится страница логина)
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { LoginForm } from "../../(protected)/authForm";
-import { useLoginMutation } from "../../../entities/account/api/authApi";
-import WebLogo from "../../../assets/photo_2025-04-04_16-36-44.jpg";
-// import "../../../app/i18n"; 
+import WebLogo from "@/assets/photo_2025-04-04_16-36-39.jpg";
+import { useLoginMutation } from '@/entities/account/api/authApi'
+import { LoginForm } from '@/pages/(protected)/authForm'
 
 export default function LoginPage() {
-  // const [isDarkMode, setDarkMode] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const navigate =  useNavigate();
   const [login, { isLoading }] = useLoginMutation();
 
-<<<<<<< HEAD
-  const handleLogin = async (data: { userName: string; password: string }) => {
-=======
-  const handleLogin = async (data: { email: string; password: string }) => {
->>>>>>> e4766e3beb45db785fde0e37310d3e02eb3bbe29
+  const handleLogin = async (data: { username: string; password: string }) => {
     try {
+      setError(null);
       const response = await login(data).unwrap();
-  
-      const token = response?.data;
-  
-      if (token) {
-        localStorage.setItem("access_token", token.token); 
-        navigate("/");
+
+      // Предполагаем структуру ответа: { token: string } или { data: { token: string } }
+      // Измени под реальную структуру твоего бэкенда!
+      const accessToken = response?.data
+
+      if (accessToken) {
+        localStorage.setItem("access_token", accessToken);
+        navigate("/", { replace: true });
       } else {
-        setError("Invalid login response");
+        setError("Токен не получен от сервера");
       }
-<<<<<<< HEAD
-    } catch (error: any) {
-     console.error(error)
-=======
-    } catch (error) {
-     console.log(error)
->>>>>>> e4766e3beb45db785fde0e37310d3e02eb3bbe29
+    } catch (err: any) {
+      console.error("Login error:", err);
+
+      const serverMessage =
+        err?.data?.message ||
+        err?.data?.error ||
+        (err?.status === 500 ? "Ошибка сервера (500)" : "");
+
+      setError(serverMessage || "Не удалось войти. Проверьте данные.");
     }
   };
-  
-  
 
   return (
-    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-10 p-4">
-      <div className="sm:w-1/2 flex justify-center sm:justify-start">
+    <div className="flex flex-col items-center justify-center min-h-screen gap-10 p-4 sm:flex-row sm:items-start">
+      <div className="hidden sm:flex sm:w-1/2 sm:justify-center lg:justify-end">
         <img
           src={WebLogo}
-          alt="Instagram Logo"
-          className="w-32 sm:w-40 lg:w-[75%] mt-[70px] ml-[150px] hidden sm:block"
+          alt="App Logo"
+          className="w-40 sm:w-64 lg:w-96"
         />
       </div>
 
-      <div className="w-full sm:w-83.5">
+      <div className="w-full max-w-md sm:w-96">
         <LoginForm onSubmit={handleLogin} />
-        {error && <p className="text-red-500">{error}</p>}
-        {isLoading && <p>Загрузка...</p>}
-
-   
+        {error && <p className="mt-4 text-center text-red-600">{error}</p>}
+        {isLoading && <p className="mt-4 text-center">Загрузка...</p>}
       </div>
     </div>
   );

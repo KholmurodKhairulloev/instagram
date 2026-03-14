@@ -74,7 +74,7 @@ const HeaderSectionProfile = ({
 						</div>
 					)}
 				</div>
-				<div className='lg:block hidden'>
+				<div className='hidden lg:block'>
 					<InfoFollowers
 						posts={posts}
 						followers={followers}
@@ -82,7 +82,7 @@ const HeaderSectionProfile = ({
 						routId={routId}
 					/>
 				</div>
-				<div className='lg:block hidden'>
+				<div className='hidden lg:block'>
 					<InfoProfile firstName={firstName} about={about} />
 				</div>
 			</aside>

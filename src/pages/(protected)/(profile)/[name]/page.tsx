@@ -142,7 +142,7 @@ export default function ProfileByNamePage() {
 		<div className='lg:ml-[50px] ml-0 overflow-hidden max-w-[900px] m-auto w-full py-[50px]'>
 			<section className='flex pb-[20px] w-[90%] lg:w-[100%] m-auto gap-[20px] lg:gap-[70px] items-center'>
 				<div
-					className={`rounded-full overflow-hidden flex items-center justify-center lg:w-[200px] lg:h-[200px] w-[100px] h-[100px] cursor-pointer p-[2px] ${
+					className={`rounded-full overflow-hidden flex items-center justify-center lg:w-[200px] lg:h-[200px]  cursor-pointer p-[2px] ${
 						isViewed
 							? 'bg-gray-500'
 							: 'bg-gradient-to-tr from-yellow-400 to-pink-600'
@@ -160,13 +160,13 @@ export default function ProfileByNamePage() {
 									? `https://instagram-api.softclub.tj/images/${profileIdData?.data?.image}`
 									: DefaultImageUser
 							}
-							className='w-full h-full rounded-full object-cover'
+							className='object-cover w-full h-full rounded-full'
 							alt='Profile Image'
 						/>
 						<AvatarFallback>
 							<img
 								src={DefaultImageUser}
-								className='w-full h-full rounded-full object-cover'
+								className='object-cover w-full h-full rounded-full'
 								alt='Default Profile Image'
 							/>
 						</AvatarFallback>
@@ -213,7 +213,7 @@ export default function ProfileByNamePage() {
 					</StorySection>
 				</div>
 			)}
-			<div className='lg:hidden block'>
+			<div className='block lg:hidden'>
 				<InfoFollowers
 					posts={profileData?.data?.postCount || profileIdData?.data?.postCount}
 					followers={
@@ -309,7 +309,7 @@ export default function ProfileByNamePage() {
 								)
 							)
 					) : (
-						<div className='w-full h-full flex items-center justify-center'>
+						<div className='flex items-center justify-center w-full h-full'>
 							<div className=''>
 								<Camera className='text-[#fff]' size={70} />
 								<h1 className='text-[70px] text-[#fff] text-center'>

@@ -7,9 +7,11 @@ import { historyApi } from '@/entities/story-homepage/story-homepage'
 import { usersHomepageApi } from '@/entities/users-homepage/users-homepage'
 import { postsHomepageApi } from '@/entities/posts-homepage/post-homepage'
 import { searchApi } from '@/entities/search/search'
+import { authApi } from '@/entities/account/api/authApi'
 
 export const store = configureStore({
   reducer: {
+    [authApi.reducerPath] : authApi.reducer,
     [postApi.reducerPath]: postApi.reducer,
     [reelsApi.reducerPath]: reelsApi.reducer,
     [chatApi.reducerPath]: chatApi.reducer,
@@ -21,6 +23,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat( 
+      authApi.middleware,
       postApi.middleware,
       reelsApi.middleware,
       chatApi.middleware,

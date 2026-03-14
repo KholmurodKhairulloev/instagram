@@ -27,16 +27,16 @@ const InfoFollowers = ({
 		<div>
 			<div className='flex lg:gap-[70px] w-full mb-[10px] justify-around m-auto  items-center '>
 				<p className='text-[gray] flex lg:gap-[10px] lg:flex-row  flex-col items-center text-[18px]'>
-					<span className='text-[#fff]'>{posts} </span>posts
+					<span className='text-[#fff]'>{posts?.length ? posts : 0} </span>posts
 				</p>
 				<p
 					onClick={() => setOpenSC(true)}
 					className='text-[gray] cursor-pointer flex lg:gap-[10px] lg:flex-row  flex-col items-center text-[18px]'
 				>
-					<span className='text-[#fff]'>{followers} </span>followers
+					<span className='text-[#fff]'>{followers?.length ? followers : 0} </span>followers
 				</p>
 				<p onClick={() => setOpen(true)} className='text-[gray] cursor-pointer flex lg:gap-[10px] lg:flex-row  flex-col items-center text-[18px]'>
-					<span className='text-[#fff]'>{following} </span>following
+					<span className='text-[#fff]'>{following?.length ? following : 0} </span>following
 				</p>
 			</div>
 			<SubscribersModal open={openSC} subscribers={subscribersData?.data} setOpen={setOpenSC} />
